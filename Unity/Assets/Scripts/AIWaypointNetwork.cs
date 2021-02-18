@@ -24,11 +24,11 @@ public class AIWaypointNetwork : MonoBehaviour
 	private PathDisplayMode m_DisplayMode = PathDisplayMode.Connections;
 
 	[SerializeField]
-	// The start of the path to be drawn
+	// The start of the path to be drawn stored as an index of "m_Waypoints"
 	private int m_UIStart = 0;
 
 	[SerializeField]
-	// The end of the path to be drawn
+	// The end of the path to be drawn stored as an index of "m_Waypoints"
 	private int m_UIEnd = 0;
 	
 	// A list is a collection (container) of a data type
