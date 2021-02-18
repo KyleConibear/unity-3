@@ -11,12 +11,14 @@ public enum PathDisplayMode {
 	Connections = 1,
 	Paths = 2
 }
-public class AIWaypointNetwork : MonoBehaviour
-{
+
+public class AIWaypointNetwork : MonoBehaviour {
 	// A field is a member variable
 	// member means belonging to the class (AIWaypointNetwork)
 	// it is best practice to keep your fields private
 	// that way no one outside of the class can access them
+
+
 	#region SerializeFields
 
 	[SerializeField]
@@ -30,12 +32,32 @@ public class AIWaypointNetwork : MonoBehaviour
 	[SerializeField]
 	// The end of the path to be drawn stored as an index of "m_Waypoints"
 	private int m_UIEnd = 0;
-	
+
 	// A list is a collection (container) of a data type
 	// the 'm_' prefix stands for member variable 
 	[SerializeField] // [Attribute] -> SerializeFields make a private variable visible in the inspector
 	private List<Transform> m_Waypoints = new List<Transform>();
 
 	#endregion
-	
+
+
+	// A property exposes a field
+
+
+	#region Properties
+
+	public PathDisplayMode DisplayMode {
+		get { // A getter returns a value
+			return m_DisplayMode;
+		}
+		set { m_DisplayMode = value; }
+	}
+
+	public int UIStart { get; set; }
+
+	public int UIEnd { get; set; }
+
+	public List<Transform> Waypoints { get; set; }
+
+	#endregion
 }
