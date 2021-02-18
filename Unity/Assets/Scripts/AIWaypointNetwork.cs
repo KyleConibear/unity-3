@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class AIWaypointNetwork : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	// A field is a member variable
+	// member means belonging to the class (AIWaypointNetwork)
+	// it is best practice to keep your fields private
+	// that way no one outside of the class can access them
+	#region Fields
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	// A list is a collection (container) of a data type
+	// the 'm_' prefix stands for member variable 
+	[SerializeField] // [Attribute] -> SerializeFields make a private variable visible in the inspector
+	private List<Transform> m_Waypoints = new List<Transform>();
+
+	#endregion
 }
