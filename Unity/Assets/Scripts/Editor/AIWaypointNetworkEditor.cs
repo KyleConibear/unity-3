@@ -30,7 +30,18 @@ public class AIWaypointNetworkEditor : Editor {
 		DrawDefaultInspector();
 	}
 
+	// Implementing this function means the Unity Editor will call it when
+	// the Scene View is being repainted. This gives us a hook to do our
+	// own rendering to the scene view
 	private void OnSceneGUI() {
-		throw new NotImplementedException();
+		// Get reference to selected component
+		AIWaypointNetwork network = (AIWaypointNetwork) target;
+		
+		// Fetch all waypoints from the network and render a label for each one
+		for (int i = 0; i < network.Waypoints.Count; i++) {
+			if (network.Waypoints[i] != null) {
+				Handles.Label(network.Waypoints[i].position, $"Waypoint {i}");
+			}
+		}
 	}
 }
