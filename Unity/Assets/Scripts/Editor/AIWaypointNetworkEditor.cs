@@ -44,6 +44,32 @@ public class AIWaypointNetworkEditor : Editor {
 			}
 		}
 		
-		
+		// If we are in the connections mode then we will draw lines connecting the waypoints
+		if (network.DisplayMode == PathDisplayMode.Connections) {
+			// Allocate array of vector to store the polyline position
+			Vector3[] linePoints = new Vector3[network.Waypoints.Count + 1];
+			
+			// Loop through each waypoint + one additional interation
+			for (int i = 0; i <= network.Waypoints.Count; i++) {
+				// Calculate the waypoint index with wrap-round in the last iteration
+				int index = i;
+				if (index == network.Waypoints.Count) {
+					index = 0;
+				}
+				
+				// Fetch the position of the waypoint for this iteration and copy into our vector array.
+				if (network.Waypoints[index] != null) {
+					linePoints[i] = network.Waypoints[index].position;
+				} else {
+					linePoints[i] = Vector3.positiveInfinity;
+				}
+			}
+			
+			// Set the Handle color to Cyan
+			Handles.color = Color.cyan;
+			
+			// Render the ployline in the scene view by passing in our list of waypoints positions
+			Handles.DrawPolyLine(linePoints);
+		}
 	}
 }
