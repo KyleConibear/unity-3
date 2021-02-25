@@ -56,6 +56,7 @@ public class AIWaypointNetwork : MonoBehaviour
 		set { m_DisplayMode = value; }
 	}
 
+
 	public int UIStart
 	{
 		get
@@ -64,14 +65,28 @@ public class AIWaypointNetwork : MonoBehaviour
 		}
 		set
 		{
+
+	public int UIStart {
+		get {
+			return m_UIStart;
+		}
+
 			m_UIStart = value;
 		}
 	}
 
+
 	public int UIEnd
 	{
+
+	public int UIEnd {
+
 		get { return m_UIEnd; }
 		set { m_UIEnd = value; }
+	}
+
+	public List<Transform> Waypoints {
+		get => m_Waypoints;
 	}
 
 
