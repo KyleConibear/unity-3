@@ -56,7 +56,7 @@ public class AIWaypointNetwork : MonoBehaviour {
 
 	public int UIEnd { get; set; }
 
-	public List<Transform> Waypoints { get; set; }
+	public List<Transform> Waypoints { get { return m_Waypoints; } }
 
 	#endregion
 }
