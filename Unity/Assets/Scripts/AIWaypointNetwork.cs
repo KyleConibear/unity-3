@@ -52,11 +52,23 @@ public class AIWaypointNetwork : MonoBehaviour {
 		set { m_DisplayMode = value; }
 	}
 
-	public int UIStart { get; set; }
+	public int UIStart {
+		get {
+			return m_UIStart;
+		}
+		set {
+			m_UIStart = value;
+		}
+	}
 
-	public int UIEnd { get; set; }
+	public int UIEnd {
+		get { return m_UIEnd; }
+		set { m_UIEnd = value; }
+	}
 
-	public List<Transform> Waypoints { get; set; }
+	public List<Transform> Waypoints {
+		get => m_Waypoints;
+	}
 
 	#endregion
 }

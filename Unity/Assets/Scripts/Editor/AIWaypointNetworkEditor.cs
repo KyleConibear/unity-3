@@ -33,7 +33,7 @@ public class AIWaypointNetworkEditor : Editor {
 	// Implementing this function means the Unity Editor will call it when
 	// the Scene View is being repainted. This gives us a hook to do our
 	// own rendering to the scene view
-	private void OnSceneGUI() {
+	void OnSceneGUI() {
 		// Get reference to selected component
 		AIWaypointNetwork network = (AIWaypointNetwork) target;
 		
@@ -43,5 +43,7 @@ public class AIWaypointNetworkEditor : Editor {
 				Handles.Label(network.Waypoints[i].position, $"Waypoint {i}");
 			}
 		}
+		
+		
 	}
 }
