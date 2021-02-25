@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using UnityEditor;
@@ -27,5 +28,9 @@ public class AIWaypointNetworkEditor : Editor {
 
 		// Tell Unity to do its default drawing of all serialized members that are NOT hidden in the inspector
 		DrawDefaultInspector();
+	}
+
+	private void OnSceneGUI() {
+		throw new NotImplementedException();
 	}
 }
