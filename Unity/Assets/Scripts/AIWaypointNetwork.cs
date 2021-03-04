@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -56,42 +57,11 @@ public class AIWaypointNetwork : MonoBehaviour
 		set { m_DisplayMode = value; }
 	}
 
+	public int UIStart { get { return m_UIStart; } set { m_UIStart = value; } }
 
-	public int UIStart
-	{
-		get
-		{
-			return m_UIStart;
-		}
-		set
-		{
+	public int UIEnd { get { return m_UIEnd; } set { m_UIEnd = value; } }
 
-	public int UIStart {
-		get {
-			return m_UIStart;
-		}
+	public List<Transform> Waypoints { get { return m_Waypoints; } }
 
-			m_UIStart = value;
-		}
-	}
-
-
-	public int UIEnd
-	{
-
-	public int UIEnd {
-
-		get { return m_UIEnd; }
-		set { m_UIEnd = value; }
-	}
-
-	public List<Transform> Waypoints {
-		get => m_Waypoints;
-	}
-
-
-	public List<Transform> Waypoints {
-		get => m_Waypoints;
-	}
 	#endregion
 }
