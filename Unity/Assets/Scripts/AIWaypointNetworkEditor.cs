@@ -65,8 +65,8 @@ public class AIWaypointNetworkEditor : Editor {
 				}
 			}
 			
-			// Set the Handle color to Cyan
-			Handles.color = Color.cyan;
+			// Set the Handle color to Blue
+			Handles.color = Color.blue;
 			
 			// Render the ployline in the scene view by passing in our list of waypoints positions
 			Handles.DrawPolyLine(linePoints);
