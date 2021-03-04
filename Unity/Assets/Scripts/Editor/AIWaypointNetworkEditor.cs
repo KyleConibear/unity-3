@@ -36,19 +36,19 @@ public class AIWaypointNetworkEditor : Editor {
 	void OnSceneGUI() {
 		// Get reference to selected component
 		AIWaypointNetwork network = (AIWaypointNetwork) target;
-		
+
 		// Fetch all waypoints from the network and render a label for each one
 		for (int i = 0; i < network.Waypoints.Count; i++) {
 			if (network.Waypoints[i] != null) {
 				Handles.Label(network.Waypoints[i].position, $"Waypoint {i}");
 			}
 		}
-		
+
 		// If we are in the connections mode then we will draw lines connecting the waypoints
 		if (network.DisplayMode == PathDisplayMode.Connections) {
 			// Allocate array of vector to store the polyline position
 			Vector3[] linePoints = new Vector3[network.Waypoints.Count + 1];
-			
+
 			// Loop through each waypoint + one additional interation
 			for (int i = 0; i <= network.Waypoints.Count; i++) {
 				// Calculate the waypoint index with wrap-round in the last iteration
@@ -56,7 +56,7 @@ public class AIWaypointNetworkEditor : Editor {
 				if (index == network.Waypoints.Count) {
 					index = 0;
 				}
-				
+
 				// Fetch the position of the waypoint for this iteration and copy into our vector array.
 				if (network.Waypoints[index] != null) {
 					linePoints[i] = network.Waypoints[index].position;
@@ -64,12 +64,39 @@ public class AIWaypointNetworkEditor : Editor {
 					linePoints[i] = Vector3.positiveInfinity;
 				}
 			}
-			
+
 			// Set the Handle color to Cyan
 			Handles.color = Color.cyan;
-			
+
 			// Render the ployline in the scene view by passing in our list of waypoints positions
 			Handles.DrawPolyLine(linePoints);
+		}
+
+		// We are in the paths mode so to proper navmesh path search and render result
+		if (network.DisplayMode == PathDisplayMode.Paths) {
+			// Allocate a new NavMEshPath
+			NavMeshPath path = new NavMeshPath();
+
+			// Shortcut variables
+			var startWaypoint = network.Waypoints[network.UIStart];
+			var endWaypoint = network.Waypoints[network.UIEnd];
+
+			// Assuming both the start and end waypoints indices selected are valid
+			if (startWaypoint != null && endWaypoint != null) {
+				// Fetch their positions from the waypoint network
+				Vector3 startPosition = startWaypoint.position;
+				Vector3 endPosition = endWaypoint.position;
+				
+				// Request a path search on the nav mash. This will return the path between
+				// our startPosition and endPosition
+				NavMesh.CalculatePath(startPosition, endPosition, NavMesh.AllAreas, path);
+				
+				// Set Handles color to orange
+				Handles.color = new Color(1f, 0.5f, 0f, 1f);
+				
+				// Draw a polyline passing in the path's corner points
+				Handles.DrawPolyLine(path.corners);
+			}
 		}
 	}
 }
