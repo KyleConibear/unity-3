@@ -14,7 +14,14 @@ public class NavAgent : MonoBehaviour {
 	#endregion
 
 
-	public AIWaypointNetwork m_AiWaypointNetwork;
+	#region MyRegion
+
+	[SerializeField] // [Attribute] -> SerializeFields make a private variable visible in the inspector
+	private AIWaypointNetwork m_AiWaypointNetwork;
+
+	#endregion
+
+	
 	
 	#region MonoBehaviour
 
@@ -31,6 +38,10 @@ public class NavAgent : MonoBehaviour {
 
 	#endregion
 
+	// Where to ?
+	// Check if target destination is unreachable
+	// When we have arrived
+	
 
 	#region Internal Methods
 
