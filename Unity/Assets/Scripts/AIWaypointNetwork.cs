@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,13 +7,15 @@ using UnityEngine;
 // Constants are immutable (cannot  be changed) values which are known at compile time and do not change for the life of the program
 // We are using an enum to describe 3 different modes of displaying a connection between waypoints
 // e.g. None, Connection(straight line), Paths(nav mesh path)
-public enum PathDisplayMode {
+public enum PathDisplayMode
+{
 	None = 0,
 	Connections = 1,
 	Paths = 2
 }
 
-public class AIWaypointNetwork : MonoBehaviour {
+public class AIWaypointNetwork : MonoBehaviour
+{
 	// A field is a member variable
 	// member means belonging to the class (AIWaypointNetwork)
 	// it is best practice to keep your fields private
@@ -30,13 +33,13 @@ public class AIWaypointNetwork : MonoBehaviour {
 
 
 	#region Internal Field
-	
+
 	// A field of type PathDisplayMode the enum defined above which contains which type we will be using at run time
 	private PathDisplayMode m_DisplayMode = PathDisplayMode.Connections;
-	
+
 	// The start of the path to be drawn stored as an index of "m_Waypoints"
 	private int m_UIStart = 0;
-	
+
 	// The end of the path to be drawn stored as an index of "m_Waypoints"
 	private int m_UIEnd = 0;
 
@@ -45,30 +48,20 @@ public class AIWaypointNetwork : MonoBehaviour {
 	// A property exposes a field
 	#region Properties
 
-	public PathDisplayMode DisplayMode {
-		get { // A getter returns a value
+	public PathDisplayMode DisplayMode
+	{
+		get
+		{ // A getter returns a value
 			return m_DisplayMode;
 		}
 		set { m_DisplayMode = value; }
 	}
 
-	public int UIStart {
-		get {
-			return m_UIStart;
-		}
-		set {
-			m_UIStart = value;
-		}
-	}
+	public int UIStart { get { return m_UIStart; } set { m_UIStart = value; } }
 
-	public int UIEnd {
-		get { return m_UIEnd; }
-		set { m_UIEnd = value; }
-	}
+	public int UIEnd { get { return m_UIEnd; } set { m_UIEnd = value; } }
 
-	public List<Transform> Waypoints {
-		get => m_Waypoints;
-	}
+	public List<Transform> Waypoints { get { return m_Waypoints; } }
 
 	#endregion
 }
