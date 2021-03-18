@@ -21,7 +21,7 @@ public class AIWaypointNetworkEditor : Editor {
 
 		// If we are in Paths display mode then display the integer sliders for the Start and End waypoint indices (indexes)
 		if (network.DisplayMode == PathDisplayMode.Paths) {
-			network.UIStart = 
+			network.UIStart =
 				EditorGUILayout.IntSlider("Waypoint Start", network.UIStart, 0, network.Waypoints.Count - 1);
 			network.UIEnd = EditorGUILayout.IntSlider("Waypoint End", network.UIEnd, 0, network.Waypoints.Count - 1);
 		}
