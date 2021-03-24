@@ -22,6 +22,9 @@ public class NavAgent : MonoBehaviour {
 
 	#region SerializeFields
 
+	[SerializeField]
+	private Animator m_Animator = null;
+	
 	[SerializeField] // [Attribute] -> SerializeFields make a private variable visible in the inspector
 	private AIWaypointNetwork m_AiWaypointNetwork;
 
