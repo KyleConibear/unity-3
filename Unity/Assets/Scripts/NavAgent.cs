@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public enum NavigationType {
 	Waypoint,
@@ -16,6 +18,8 @@ public class NavAgent : MonoBehaviour {
 	private NavMeshAgent m_NavMeshAgent = null; // Provides use with a reference to the component, this allows us to communicate with it
 
 	private int m_NavPositionIndex = 0; 
+
+	private float m_SmoothAngle = 0;
 
 	#endregion
 
@@ -42,11 +46,38 @@ public class NavAgent : MonoBehaviour {
 		// Initialization is the first time we assign a value to a new variable/field
 		m_NavMeshAgent = GetComponent<NavMeshAgent>(); // Finds a Component of the given Type on the same Gameobject as the script
 
+		m_NavMeshAgent.updateRotation = false;
+		
 		this.MoveToPosition(this.GetDestinationPosition());
 	}
 
 	// Update is called once per frame
 	private void Update() {
+
+		// Transform agents target velocity into local space
+		Vector3 targetVelocity = transform.InverseTransformVector(m_NavMeshAgent.desiredVelocity);
+
+		// Speed is simply the amount of desired velocity projected onto our own forward vector
+		float speed = targetVelocity.z;
+		
+		// Get angle in degrees we need to turn to reach the desired velocity direction
+		float targetAngle = Mathf.Atan2(targetVelocity.x, targetVelocity.z) * Mathf.Rad2Deg;
+		
+		// Smoothly interpolate towards the new angle
+		m_SmoothAngle = Mathf.MoveTowardsAngle(m_SmoothAngle, targetAngle, 80f * Time.deltaTime);
+		
+		// Set animator parameters
+		m_Animator.SetFloat("Speed", speed, 0.1f, Time.deltaTime);
+		m_Animator.SetFloat("Angle", m_SmoothAngle);
+
+
+		if (m_NavMeshAgent.desiredVelocity.sqrMagnitude > Mathf.Epsilon) {
+			if (Mathf.Abs(targetAngle) < 80.0f && m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Locomotion")) {
+				Quaternion lookRotation = Quaternion.LookRotation(m_NavMeshAgent.desiredVelocity, Vector3.up);
+				transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, 5.0f * Time.deltaTime);
+			}
+		}
+		
 		if ((!m_NavMeshAgent.hasPath &&
 		     !m_NavMeshAgent.pathPending) ||
 		    m_NavMeshAgent.pathStatus == NavMeshPathStatus.PathInvalid) {
@@ -63,6 +94,14 @@ public class NavAgent : MonoBehaviour {
 			if (!m_NavMeshAgent.isPathStale) {
 				Debug.Log("Is walking");
 			}
+		}
+	}
+
+	private void OnAnimatorMove() {
+		if (m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Locomotion")) {
+			transform.rotation = m_Animator.rootRotation;
+			
+			m_NavMeshAgent.velocity = m_Animator.deltaPosition / Time.deltaTime;
 		}
 	}
 

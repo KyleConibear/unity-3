@@ -47,7 +47,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85ac7215fec45040bfa5c3243926511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Animator: {fileID: 0}
+  m_Animator: {fileID: 3702813821362212529}
   m_AiWaypointNetwork: {fileID: 0}
   m_NavType: 1
 --- !u!1001 &7064349171631993632
@@ -137,11 +137,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: DefaultCharacterModel
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 1ffda6808fb871b4fbdac5685d4543a6,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 91146361bc0c766429908cf66b118f71, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ffda6808fb871b4fbdac5685d4543a6, type: 3}
 --- !u!4 &7314731287700198603 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1ffda6808fb871b4fbdac5685d4543a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 7064349171631993632}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3702813821362212529 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 1ffda6808fb871b4fbdac5685d4543a6,
     type: 3}
   m_PrefabInstance: {fileID: 7064349171631993632}
   m_PrefabAsset: {fileID: 0}
