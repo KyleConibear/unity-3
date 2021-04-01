@@ -58,7 +58,7 @@ public class NavAgent : MonoBehaviour {
 		Vector3 targetVelocity = transform.InverseTransformVector(m_NavMeshAgent.desiredVelocity);
 
 		// Speed is simply the amount of desired velocity projected onto our own forward vector
-		float speed = targetVelocity.z;
+		float speed = Mathf.Abs(targetVelocity.z);
 		
 		// Get angle in degrees we need to turn to reach the desired velocity direction
 		float targetAngle = Mathf.Atan2(targetVelocity.x, targetVelocity.z) * Mathf.Rad2Deg;
