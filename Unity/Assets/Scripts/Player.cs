@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
@@ -10,7 +8,8 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update() {
 		// Click left mouse button
-		if (Input.GetMouseButtonDown(0)) {
+		if (Input.GetMouseButtonDown(0) ||
+		    Input.GetMouseButton(0)) {
 			m_Weapon.Shoot();
 		}
 	}
