@@ -1142,9 +1142,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1823747982, guid: 010e2f02ccc86704286e0294a542881e, type: 3}
+      propertyPath: m_MaxAmmo
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1823747982, guid: 010e2f02ccc86704286e0294a542881e, type: 3}
       propertyPath: m_AmmoCounter
       value: 
       objectReference: {fileID: 1148802492}
+    - target: {fileID: 1823747982, guid: 010e2f02ccc86704286e0294a542881e, type: 3}
+      propertyPath: m_MagazineCapacity
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7025548471018104511, guid: 010e2f02ccc86704286e0294a542881e,
         type: 3}
       propertyPath: m_Name

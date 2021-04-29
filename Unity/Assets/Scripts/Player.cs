@@ -8,9 +8,12 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update() {
 		// Click left mouse button
-		if (Input.GetMouseButtonDown(0) ||
-		    Input.GetMouseButton(0)) {
+		if (Input.GetMouseButtonDown(0)) {
 			m_Weapon.Shoot();
+		}
+
+		if (Input.GetKeyDown(KeyCode.R)) {
+			m_Weapon.Reload();
 		}
 	}
 }
