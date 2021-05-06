@@ -21,6 +21,18 @@ public class AIWaypointNetwork : MonoBehaviour {
 
 	#region SerializeFields
 
+	[SerializeField]
+	// A field of type PathDisplayMode the enum defined above which contains which type we will be using at run time
+	private PathDisplayMode m_DisplayMode = PathDisplayMode.Connections;
+
+	[SerializeField]
+	// The start of the path to be drawn stored as an index of "m_Waypoints"
+	private int m_UIStart = 0;
+
+	[SerializeField]
+	// The end of the path to be drawn stored as an index of "m_Waypoints"
+	private int m_UIEnd = 0;
+
 	// A list is a collection (container) of a data type
 	// the 'm_' prefix stands for member variable 
 	[SerializeField] // [Attribute] -> SerializeFields make a private variable visible in the inspector
@@ -29,20 +41,9 @@ public class AIWaypointNetwork : MonoBehaviour {
 	#endregion
 
 
-	#region Internal Field
-	
-	// A field of type PathDisplayMode the enum defined above which contains which type we will be using at run time
-	private PathDisplayMode m_DisplayMode = PathDisplayMode.Connections;
-	
-	// The start of the path to be drawn stored as an index of "m_Waypoints"
-	private int m_UIStart = 0;
-	
-	// The end of the path to be drawn stored as an index of "m_Waypoints"
-	private int m_UIEnd = 0;
-
-	#endregion
-
 	// A property exposes a field
+
+
 	#region Properties
 
 	public PathDisplayMode DisplayMode {
@@ -52,23 +53,11 @@ public class AIWaypointNetwork : MonoBehaviour {
 		set { m_DisplayMode = value; }
 	}
 
-	public int UIStart {
-		get {
-			return m_UIStart;
-		}
-		set {
-			m_UIStart = value;
-		}
-	}
+	public int UIStart { get; set; }
 
-	public int UIEnd {
-		get { return m_UIEnd; }
-		set { m_UIEnd = value; }
-	}
+	public int UIEnd { get; set; }
 
-	public List<Transform> Waypoints {
-		get => m_Waypoints;
-	}
+	public List<Transform> Waypoints { get; set; }
 
 	#endregion
 }
