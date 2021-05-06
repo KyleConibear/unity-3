@@ -92,7 +92,6 @@ public class NavAgent : MonoBehaviour {
 			// Do nothing
 		} else { // Go to a new destination
 			if (!m_NavMeshAgent.isPathStale) {
-				Debug.Log("Is walking");
 			}
 		}
 	}

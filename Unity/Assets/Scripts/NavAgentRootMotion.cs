@@ -33,7 +33,7 @@ public class NavAgentRootMotion : MonoBehaviour
 	{
 		// Cache NavMeshAgent Reference
 		_navAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-		_animator = GetComponent<Animator>();
+		_animator = GetComponentInChildren<Animator>();
 
 		// Turn off auto-update of rotation
 		/*_navAgent.updatePosition = false;*/

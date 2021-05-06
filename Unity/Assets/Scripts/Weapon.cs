@@ -52,6 +52,7 @@ public class Weapon : MonoBehaviour {
 
 	#region Monobehaviour Methods
 
+	// Initialization, called once at the start
 	private void Awake() {
 		CurrentAmmo = m_MagazineCapacity;
 	}

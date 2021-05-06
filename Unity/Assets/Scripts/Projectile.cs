@@ -46,6 +46,13 @@ public class Projectile : MonoBehaviour {
 	private void OnCollisionEnter(Collision other) {
 		if (other.gameObject.GetComponent<Projectile>()) {
 			return; // Exit function
+		} 
+		
+		// Check whether the other object we are colliding with (NPC) has
+		// a Health component attached
+		var health = other.gameObject.GetComponent<Health>();
+		if (health != null) {
+			health.Damage(10 /*TODO Replace hardcoded value with variable*/);
 		}
 		Destroy(this.gameObject);
 	}
