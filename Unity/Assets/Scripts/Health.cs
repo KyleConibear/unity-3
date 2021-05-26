@@ -49,6 +49,8 @@ public class Health : MonoBehaviour {
 	#region Public Methods
 
 	public void Damage(int value) {
+		Debug.Log($"{this.name} {value} damage taken");
+		
 		// Subtract damage value from our current health
 		m_CurrentHealth -= value;
 

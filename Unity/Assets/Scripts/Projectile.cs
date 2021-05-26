@@ -24,6 +24,18 @@ public class Projectile : MonoBehaviour {
 	// to the RigidBody component
 	private Rigidbody m_Rigidbody;
 
+	private int m_Damage;
+	
+	#endregion
+
+
+	// The purpose of a property to expose a private variable(field) outside of the class via public property
+	#region Public Properties
+	public int Damage {
+		get => m_Damage;
+		set => m_Damage = value;
+	}
+
 	#endregion
 
 
@@ -48,11 +60,15 @@ public class Projectile : MonoBehaviour {
 			return; // Exit function
 		} 
 		
+		Debug.Log($"{this.name} collided with {other.gameObject.name}");
+		
 		// Check whether the other object we are colliding with (NPC) has
 		// a Health component attached
-		var health = other.gameObject.GetComponent<Health>();
+		// If the first operation equal null, perform the second operation
+		var health = other.gameObject.GetComponent<Health>() ?? other.gameObject.GetComponentInParent<Health>();
+
 		if (health != null) {
-			health.Damage(10 /*TODO Replace hardcoded value with variable*/);
+			health.Damage(this.Damage);
 		}
 		Destroy(this.gameObject);
 	}

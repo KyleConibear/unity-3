@@ -17,6 +17,9 @@ public class Weapon : MonoBehaviour {
 	private Text m_AmmoCounter;
 
 	[SerializeField]
+	private FireModeType m_FireMode = FireModeType.Single;
+
+	[SerializeField]
 	private int m_MagazineCapacity = 30;
 
 	[FormerlySerializedAs("m_MaxAmmo")] [SerializeField]
@@ -25,6 +28,9 @@ public class Weapon : MonoBehaviour {
 	[SerializeField]
 	private float m_RateOfFire = 0.25f;
 
+	[SerializeField]
+	private int m_Damage = 10;
+	
 	#endregion
 
 
@@ -33,6 +39,11 @@ public class Weapon : MonoBehaviour {
 	private int m_CurrentAmmo;
 
 	private IEnumerator m_ShootCoroutine; // Variable the datatype (delegate)
+
+	public enum FireModeType {
+		Single,
+		Full
+	}
 
 	#endregion
 
@@ -46,6 +57,13 @@ public class Weapon : MonoBehaviour {
 			m_AmmoCounter.text = $"{m_CurrentAmmo} / {m_ReserveAmmo}";
 		}
 	}
+
+	#endregion
+
+
+	#region Public Properties
+
+	public FireModeType FireMode => m_FireMode;
 
 	#endregion
 
@@ -72,9 +90,12 @@ public class Weapon : MonoBehaviour {
 	
 	private IEnumerator ShootCoroutine() {
 		if (this.CurrentAmmo > 0) {
-			Instantiate(m_ProjectilePrefab.gameObject,
-				m_SpawnPosition.position,
-				m_SpawnPosition.rotation);
+			
+			Projectile projectile = Instantiate(m_ProjectilePrefab,
+												m_SpawnPosition.position,
+												m_SpawnPosition.rotation);
+			projectile.Damage = m_Damage; // Assigning out weapons damage to the projectile damage
+			
 			this.CurrentAmmo--;
 		}
 
