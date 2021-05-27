@@ -1,13 +1,14 @@
 using System;
 using UnityEngine;
+// Step 1
+using UnityEngine.UI;
+
 
 /// <summary>
 /// The Health class represents how much health an object has
 /// </summary>
 
 public class Health : MonoBehaviour {
-	
-	
 	
 	#region SerializeField Fields
 
@@ -16,6 +17,10 @@ public class Health : MonoBehaviour {
 
 	[SerializeField]
 	private int m_CurrentHealth;
+	
+	// Step 2
+	[SerializeField]
+	private Image m_HealthImage;
 
 	#endregion
 
@@ -53,6 +58,10 @@ public class Health : MonoBehaviour {
 		
 		// Subtract damage value from our current health
 		m_CurrentHealth -= value;
+
+		if (m_HealthImage) {
+			m_HealthImage.fillAmount = (float) m_CurrentHealth / m_MaxHealth;
+		}
 
 		if (this.IsAlive == false) { // We are dead
 			// Do something when we die

@@ -40,6 +40,13 @@ public class Player : MonoBehaviour {
 		if (Input.GetMouseButtonDown(0) || (this.Weapon.FireMode == Weapon.FireModeType.Full && Input.GetMouseButton(0))) {
 			this.Weapon.Shoot();
 		}
+		
+		// right click
+		if (Input.GetMouseButton(1)) {
+			this.SetFieldOfView(45);
+		} else {
+			this.SetFieldOfView(60);
+		}
 
 		if (Input.GetKeyDown(KeyCode.R)) {
 			this.Weapon.Reload();
@@ -69,6 +76,9 @@ public class Player : MonoBehaviour {
 				m_Weapons[i].gameObject.SetActive(false);
 			}
 		}
+	}
+	private void SetFieldOfView(float value) {
+		Camera.main.fieldOfView = value;
 	}
 
 	#endregion

@@ -119,8 +119,13 @@ public class NavAgent : MonoBehaviour {
 	/// </summary>
 	/// <param name="position">target position</param>
 	private void MoveToPosition(Vector3 position) {
-		if (m_NavMeshAgent == null || !m_NavMeshAgent.gameObject.activeInHierarchy)
+		if (m_NavMeshAgent == null ||
+		    !m_NavMeshAgent.gameObject.activeInHierarchy ||
+		    !m_NavMeshAgent.isActiveAndEnabled ||
+		    !m_NavMeshAgent.isOnNavMesh) {
 			return;
+		}
+			
 		m_NavMeshAgent.destination = position;
 	}
 
