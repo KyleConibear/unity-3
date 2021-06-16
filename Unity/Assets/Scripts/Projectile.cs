@@ -68,7 +68,10 @@ public class Projectile : MonoBehaviour {
 		var health = other.gameObject.GetComponent<Health>() ?? other.gameObject.GetComponentInParent<Health>();
 
 		if (health != null) {
-			health.Damage(this.Damage);
+			// If the GameObject we are collider with is tagged as being a head, we apply twice as much damage
+			// Syntax
+			// condition ? true code : false code
+			health.Damage(other.gameObject.CompareTag("Head") ? this.Damage * 2 : this.Damage);
 		}
 		Destroy(this.gameObject);
 	}

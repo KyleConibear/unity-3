@@ -30,6 +30,11 @@ public class Weapon : MonoBehaviour {
 
 	[SerializeField]
 	private int m_Damage = 10;
+
+	[SerializeField]
+	[Range(20, 50)]
+	private int m_ZoomAmount = 35; //Step 1
+
 	
 	#endregion
 
@@ -48,7 +53,7 @@ public class Weapon : MonoBehaviour {
 	#endregion
 
 
-	#region Internal Properties
+	#region Properties
 
 	private int CurrentAmmo {
 		get => m_CurrentAmmo;
@@ -57,6 +62,7 @@ public class Weapon : MonoBehaviour {
 			m_AmmoCounter.text = $"{m_CurrentAmmo} / {m_ReserveAmmo}";
 		}
 	}
+	public int ZoomAmount => m_ZoomAmount; // Step 2
 
 	#endregion
 

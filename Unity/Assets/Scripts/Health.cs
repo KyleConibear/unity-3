@@ -1,15 +1,15 @@
 using System;
+using System.Diagnostics;
 using UnityEngine;
 // Step 1
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 
 /// <summary>
 /// The Health class represents how much health an object has
 /// </summary>
-
 public class Health : MonoBehaviour {
-	
 	#region SerializeField Fields
 
 	[SerializeField]
@@ -17,7 +17,7 @@ public class Health : MonoBehaviour {
 
 	[SerializeField]
 	private int m_CurrentHealth;
-	
+
 	// Step 2
 	[SerializeField]
 	private Image m_HealthImage;
@@ -33,10 +33,11 @@ public class Health : MonoBehaviour {
 	public bool IsAlive => m_CurrentHealth > 0;
 
 	// Is delegate which is a variable types that hold a function
-	public System.Action OnDead { get; set; }
+	public System.Action DamageAction { get; set; } // Step 1
+	public System.Action DeadAction { get; set; }
 
 	#endregion
-	
+
 
 	#region MonoBehaviour Methods
 
@@ -54,19 +55,26 @@ public class Health : MonoBehaviour {
 	#region Public Methods
 
 	public void Damage(int value) {
-		Debug.Log($"{this.name} {value} damage taken");
-		
 		// Subtract damage value from our current health
 		m_CurrentHealth -= value;
+
+		Debug.Log($"{name}>Health.Damage: value<{value}>, health<{m_CurrentHealth}>, isAlive<{IsAlive}>");
 
 		if (m_HealthImage) {
 			m_HealthImage.fillAmount = (float) m_CurrentHealth / m_MaxHealth;
 		}
 
 		if (this.IsAlive == false) { // We are dead
+			Debug.Log($"{name}>Health.Damage: Is DEAD");
+			// Fix health bar remaining after death
+			m_HealthImage.enabled = false;
+
 			// Do something when we die
 			// The `?` is a null check
-			OnDead?.Invoke(); // Call the delegate function (could be anything)
+			DeadAction?.Invoke(); // Call the delegate function (could be anything)
+		} 
+		else { // Step 2
+			DamageAction?.Invoke();
 		}
 	}
 

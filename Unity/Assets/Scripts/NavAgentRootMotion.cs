@@ -9,6 +9,7 @@ using System.Collections;
 [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 public class NavAgentRootMotion : MonoBehaviour 
 {
+	[SerializeField] private State m_State = State.Patrol;
 	// Inspector Assigned Variable
 	public AIWaypointNetwork WaypointNetwork = null;
 	public int				 CurrentIndex	 = 0;
@@ -29,7 +30,7 @@ public class NavAgentRootMotion : MonoBehaviour
 	// Desc	:	Cache MavMeshAgent and set initial 
 	//			destination.
 	// -----------------------------------------------------
-	void Start () 
+	void Awake () 
 	{
 		// Cache NavMeshAgent Reference
 		_navAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -41,9 +42,6 @@ public class NavAgentRootMotion : MonoBehaviour
 
 		// If not valid Waypoint Network has been assigned then return
 		if (WaypointNetwork==null) return;
-
-		// Set first waypoint
-		SetNextDestination ( false );
 	}
 
 	// -----------------------------------------------------
@@ -54,6 +52,10 @@ public class NavAgentRootMotion : MonoBehaviour
 	// -----------------------------------------------------
 	void SetNextDestination ( bool increment )
 	{
+		if (m_State != State.Patrol) {
+			return;
+		}
+		
 		// If no network return
 		if (!WaypointNetwork) return;
 
@@ -192,5 +194,14 @@ public class NavAgentRootMotion : MonoBehaviour
 
 		// All done so inform the agent it can resume control
 		_navAgent.CompleteOffMeshLink();
+	}
+
+	public void StartPatrolling() {
+		SetNextDestination ( false );
+	}
+
+	public void GoToPosition(Vector3 position) {
+		m_State = State.Chase;
+		_navAgent.destination = position;
 	}
 }

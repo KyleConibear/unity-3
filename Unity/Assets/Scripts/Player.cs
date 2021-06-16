@@ -1,16 +1,10 @@
-using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-	#region Internal
-
-	private Weapon[] m_Weapons;
-
-	#endregion
-
 
 	#region Internal Fields
 
+	private Weapon[] m_Weapons;
 	private int m_WeaponIndex = 0;
 
 	#endregion
@@ -43,7 +37,7 @@ public class Player : MonoBehaviour {
 		
 		// right click
 		if (Input.GetMouseButton(1)) {
-			this.SetFieldOfView(45);
+			this.SetFieldOfView(this.Weapon.ZoomAmount); // Step 3
 		} else {
 			this.SetFieldOfView(60);
 		}
